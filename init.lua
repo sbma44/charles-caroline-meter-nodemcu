@@ -64,17 +64,17 @@ wifi_getap_result = function(T)
       location = "work"
     elseif ssid == "Q Continuum" then
       location = "home"
-    else
-      tmr.create():alarm(3000, tmr.ALARM_SINGLE, wifi_scan)
     end
+  end
 
-    if location ~= "" then
-      print("Connecting to WiFi access point @ "..location.."...")
-      dofile("credentials."..location..".lua")
-      wifi.setmode(wifi.STATION)
-      wifi.sta.config({ssid=SSID, pwd=PASSWORD})
-      -- wifi.sta.connect() not necessary because config() uses auto-connect=true by default
-    end
+  if location ~= "" then
+    print("Connecting to WiFi access point @ "..location.."...")
+    dofile("credentials."..location..".lua")
+    wifi.setmode(wifi.STATION)
+    wifi.sta.config({ssid=SSID, pwd=PASSWORD})
+    -- wifi.sta.connect() not necessary because config() uses auto-connect=true by default
+  else
+    tmr.create():alarm(3000, tmr.ALARM_SINGLE, wifi_scan)
   end
 end
 
