@@ -65,8 +65,7 @@ wifi_getap_result = function(T)
     elseif ssid == "Q Continuum" then
       location = "home"
     else
-      local d = tmrcreate()
-      tmr.alarm(d, 3000, tmr.ALARM_SINGLE, wifi_scan)
+      tmr.create():alarm(3000, tmr.ALARM_SINGLE, wifi_scan)
     end
 
     if location ~= "" then
