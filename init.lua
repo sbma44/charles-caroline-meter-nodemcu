@@ -70,7 +70,6 @@ wifi_getap_result = function(T)
   if location ~= "" then
     print("Connecting to WiFi access point @ "..location.."...")
     dofile("credentials."..location..".lua")
-    wifi.setmode(wifi.STATION)
     wifi.sta.config({ssid=SSID, pwd=PASSWORD})
     -- wifi.sta.connect() not necessary because config() uses auto-connect=true by default
   else
@@ -79,6 +78,7 @@ wifi_getap_result = function(T)
 end
 
 function wifi_scan()
+  wifi.setmode(wifi.STATION)
   wifi.sta.getap(wifi_getap_result)
 end
 
