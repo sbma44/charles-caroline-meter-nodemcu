@@ -82,10 +82,15 @@ function wifi_scan()
   wifi.sta.getap(wifi_getap_result)
 end
 
+-- set up meter needle GPIOs
+gpio.mode(5, gpio.OUTPUT)
+gpio.write(5, gpio.LOW)
+gpio.mode(6, gpio.OUTPUT)
+gpio.write(6, gpio.LOW)
 
 -- Register WiFi Station event callbacks
 wifi.eventmon.register(wifi.eventmon.STA_CONNECTED, wifi_connect_event)
 wifi.eventmon.register(wifi.eventmon.STA_GOT_IP, wifi_got_ip_event)
 wifi.eventmon.register(wifi.eventmon.STA_DISCONNECTED, wifi_disconnect_event)
-wifi_scan()
-
+--wifi_scan()
+tmr.create():alarm(1000, tmr.ALARM_SINGLE, startup)
