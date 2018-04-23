@@ -2,7 +2,7 @@ function set_meter(b)
     if b == 0 then
         cycle_meter()
     else
-        gpio.serout(5, gpio.HIGH, { 1000 }, b, cycle_meter)
+        gpio.serout(5, gpio.HIGH, { 10000 }, b, cycle_meter)
     end
 end
 
@@ -15,7 +15,6 @@ val = 0
 function do_increment()
     set_meter(val)
     val = (val + 10) % 256
-    tmr.alarm(1000, tmr.ALARM_SINGLE, do_increment)
 end
 
-do_increment()
+--tmr.alarm(1, 1000, tmr.ALARM_AUTO, do_increment)
